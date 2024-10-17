@@ -24,7 +24,7 @@ public abstract class Actividad {
         this.nivel_dificultad  = nivel_dificultad ;
         this.resena = resena;
         this.tipo_actividad = tipo_actividad;
-        this.actividades_sugeridas = new ArrayList<>();
+        this.actividades_sugeridas = actividades_sugeridas;
         this.prerrequisitos = prerrequisitos;
         this.fecha_limite = fecha_limite;
     }
