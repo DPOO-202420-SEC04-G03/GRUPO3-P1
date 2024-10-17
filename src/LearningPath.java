@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-public class LearningPath {
+
+//Atributos
+public class LearningPath {                
     private String titulo;
     private String descripcion;
     private List<String> objetivos;
@@ -26,6 +29,7 @@ public class LearningPath {
         this.duracion = 0; // Inicialmente 0 hasta que se añadan actividades
         this.rating = 0.0; // Inicialmente el rating es 0
         this.fecha_modificacion = new Date(); // Inicializa con la fecha actual
+        this.actividades= new ArrayList<>();
     }
     //setters y getters
 
