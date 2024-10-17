@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -7,7 +8,7 @@ public abstract class Actividad {
 
     private int ID_actividad;
     private String objetivo;
-    private String nivel_difultad;  // Principiante/Intermedio/Avanzado
+    private String nivel_dificultad ;  // Principiante/Intermedio/Avanzado
     private String resena;
     private String tipo_actividad;
     private List<Actividad> actividades_sugeridas;
@@ -17,13 +18,13 @@ public abstract class Actividad {
 
     //Constructor
 
-    public Actividad(int ID_actividad, String objetivo, String nivel_difultad, String resena, String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
+    public Actividad(int ID_actividad, String objetivo, String nivel_dificultad , String resena, String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
         this.ID_actividad = ID_actividad;
         this.objetivo = objetivo;
-        this.nivel_difultad = nivel_difultad;
+        this.nivel_dificultad  = nivel_dificultad ;
         this.resena = resena;
         this.tipo_actividad = tipo_actividad;
-        this.actividades_sugeridas = actividades_sugeridas;
+        this.actividades_sugeridas = new ArrayList<>();
         this.prerrequisitos = prerrequisitos;
         this.fecha_limite = fecha_limite;
     }
@@ -47,12 +48,12 @@ public abstract class Actividad {
         this.objetivo = objetivo;
     }
 
-    public String getNivel_difultad() {
-        return this.nivel_difultad;
+    public String getnivel_dificultad () {
+        return this.nivel_dificultad ;
     }
 
-    public void setNivel_difultad(String nivel_difultad) {
-        this.nivel_difultad = nivel_difultad;
+    public void setnivel_dificultad (String nivel_dificultad ) {
+        this.nivel_dificultad  = nivel_dificultad ;
     }
 
     public String getResena() {
