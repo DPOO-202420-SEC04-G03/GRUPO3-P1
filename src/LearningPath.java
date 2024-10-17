@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import actividad.Actividad;
+
 //Atributos
 public class LearningPath {                
     private String titulo;
