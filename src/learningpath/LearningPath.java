@@ -145,14 +145,12 @@ public class LearningPath {
 
     public void eliminarActividad(Actividad actividad){
 
-        int duracion_total= 0;
+
         this.actividades.remove(actividad);
         
-        for (Actividad act: this.actividades){
+        actualizarDuracion();
 
-            duracion_total+= act.getDuracion();
-        }
-        this.duracion= duracion_total;
-
+        this.fecha_modificacion= new Date();
+        
     }
 }
