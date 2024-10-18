@@ -49,13 +49,14 @@ public abstract class Actividad {
         this.objetivo = objetivo;
     }
 
-    public String getnivel_dificultad () {
-        return this.nivel_dificultad ;
+    public String getNivel_dificultad() {
+        return this.nivel_dificultad;
     }
-
-    public void setnivel_dificultad (String nivel_dificultad ) {
-        this.nivel_dificultad  = nivel_dificultad ;
+    
+    public void setNivel_dificultad(String nivel_dificultad) {
+        this.nivel_dificultad = nivel_dificultad;
     }
+    
 
     public String getResena() {
         return this.resena;
