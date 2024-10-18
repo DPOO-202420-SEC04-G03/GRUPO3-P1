@@ -23,7 +23,7 @@ public abstract class Actividad {
     public Actividad(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
                 List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
         this.ID_actividad = ID_actividad;
-        this.descripcion = descripcion
+        this.descripcion = descripcion;
         this.objetivo = objetivo;
         this.nivel_dificultad  = nivel_dificultad ;
         this.resena = resena;
@@ -45,10 +45,10 @@ public abstract class Actividad {
     }
 
     public String getDescripcion(){
-        return this.descripcion
+        return this.descripcion;
     }
 
-    public String setDescripcion(String descripcion){
+    public void setDescripcion(String descripcion){
         this.descripcion=descripcion;
     }
 
