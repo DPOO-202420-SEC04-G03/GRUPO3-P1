@@ -9,11 +9,11 @@ public class RecursoEducativo extends Actividad {
     private String url;
 
     // Constructor
-    public RecursoEducativo(int ID_actividad, String objetivo, String nivel_dificultad, String resena, 
+    public RecursoEducativo(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, String resena, 
                             String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos, 
                             Date fecha_limite, String tipoRecurso, String url) {
         
-        super(ID_actividad, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite); 
+        super(ID_actividad, descripcion, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite); 
 
         this.tipoRecurso = tipoRecurso;
         this.url = url;
