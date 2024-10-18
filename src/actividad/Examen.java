@@ -10,8 +10,8 @@ public class Examen extends Actividad {
 
     // Constructor
     public Examen(int ID_actividad, String objetivo, String nivel_dificultad, String resena, String tipo_actividad, 
-                  List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite,
-                  String estado_entrega, Date fecha_entrega, List<Pregunta> preguntas) {
+                    List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite,
+                    String estado_entrega, Date fecha_entrega, List<Pregunta> preguntas) {
         super(ID_actividad, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite);
         this.estado_entrega = estado_entrega;
         this.fecha_entrega = fecha_entrega;
@@ -43,7 +43,9 @@ public class Examen extends Actividad {
         this.preguntas = preguntas;
     }
 
-    // Métodos adicionales
+
+
+    // Agregar/Eliminar preguntas
     public void agregarPregunta(Pregunta pregunta) {
         this.preguntas.add(pregunta);
     }
