@@ -1,5 +1,6 @@
 package usuario;
 
+import java.sql.Date;
 import java.util.List;
 import learningpath.LearningPath;
 
@@ -21,4 +22,29 @@ public class Profesor extends Usuario {
     public void setLearningPathsCreados(List<LearningPath> learningPathsCreados) {
         this.learningPathsCreados = learningPathsCreados;
     }
+
+
+
+    //crear learning path
+
+    public LearningPath crearLearningPath(String titulo, String descripcion, List<String> objetivos, String nivel_dificultad, int id_LP, Date fecha_creacion, String version){
+
+        LearningPath lpnuevo= new LearningPath(titulo, descripcion, objetivos, nivel_dificultad, id_LP, fecha_creacion, version);
+        this.learningPathsCreados.add(lpnuevo);
+        
+        return lpnuevo;
+
+    }
+
+    public void editarLearningPath(int id_LP, String nuevoTitulo, String nuevaDescripcion, List<String> nuevosObjetivos,
+                                        String nuevoNivelDificultad, String nuevaVersion) {
+
+    
+    
+    
+    
+                                        }
+
+
+
 }
