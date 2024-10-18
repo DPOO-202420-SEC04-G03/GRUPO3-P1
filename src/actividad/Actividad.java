@@ -19,7 +19,8 @@ public abstract class Actividad {
 
     //Constructor
 
-    public Actividad(int ID_actividad, String objetivo, String nivel_dificultad , String resena, String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
+    public Actividad(int ID_actividad, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
+                List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
         this.ID_actividad = ID_actividad;
         this.objetivo = objetivo;
         this.nivel_dificultad  = nivel_dificultad ;
