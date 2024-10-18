@@ -16,11 +16,11 @@ public class Quiz extends Actividad{
 
     //Constructor
 
-    public Quiz(int ID_actividad, String objetivo, String nivel_dificultad, String resena,
+    public Quiz(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, String resena,
                 String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos,
                 Date fecha_limite, float calificacion_minima, float calificacion_obtenida, List<Pregunta> preguntas) {
 
-        super(ID_actividad, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite); 
+        super(ID_actividad, descripcion, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite); 
         this.calificacion_minima = calificacion_minima;
         this.calificacion_obtenida = calificacion_obtenida;
         this.preguntas = preguntas;

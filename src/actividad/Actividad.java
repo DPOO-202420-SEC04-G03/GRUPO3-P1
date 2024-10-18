@@ -8,6 +8,7 @@ import java.util.Objects;
 public abstract class Actividad {        
 
     private int ID_actividad;
+    private String descripcion;
     private String objetivo;
     private String nivel_dificultad ;  // Principiante/Intermedio/Avanzado
     private String resena;
@@ -19,9 +20,10 @@ public abstract class Actividad {
 
     //Constructor
 
-    public Actividad(int ID_actividad, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
+    public Actividad(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
                 List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
         this.ID_actividad = ID_actividad;
+        this.descripcion = descripcion
         this.objetivo = objetivo;
         this.nivel_dificultad  = nivel_dificultad ;
         this.resena = resena;
@@ -40,6 +42,14 @@ public abstract class Actividad {
 
     public void setID_actividad(int ID_actividad) {
         this.ID_actividad = ID_actividad;
+    }
+
+    public String getDescripcion(){
+        return this.descripcion
+    }
+
+    public String setDescripcion(String descripcion){
+        this.descripcion=descripcion;
     }
 
     public String getObjetivo() {
