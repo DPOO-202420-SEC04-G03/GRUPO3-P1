@@ -14,9 +14,9 @@ public class Encuesta extends Actividad {
 
     public Encuesta(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
                     List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite, String estado_entrega,
-                    List<Pregunta> preguntas){
+                    List<Pregunta> preguntas, int duracion){
 
-        super(ID_actividad, descripcion, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite); 
+        super(ID_actividad, descripcion, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite, duracion); 
         
         this.estado_entrega= estado_entrega;
         this.preguntas= preguntas;

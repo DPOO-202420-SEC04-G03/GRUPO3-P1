@@ -16,12 +16,13 @@ public abstract class Actividad {
     private List<Actividad> actividades_sugeridas;
     private boolean prerrequisitos;
     private Date fecha_limite;
+    private int duracion;
 
 
     //Constructor
 
     public Actividad(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
-                List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite) {
+                List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite, int duracion) {
         this.ID_actividad = ID_actividad;
         this.descripcion = descripcion;
         this.objetivo = objetivo;
@@ -31,6 +32,7 @@ public abstract class Actividad {
         this.actividades_sugeridas = actividades_sugeridas;
         this.prerrequisitos = prerrequisitos;
         this.fecha_limite = fecha_limite;
+        this.duracion= duracion;
     }
 
     //setters y getters
@@ -112,5 +114,14 @@ public abstract class Actividad {
     public void setFecha_limite(Date fecha_limite) {
         this.fecha_limite = fecha_limite;
     }
-        
+    
+
+    public int getDuracion() {
+        return this.duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
 }

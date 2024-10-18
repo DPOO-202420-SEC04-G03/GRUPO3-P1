@@ -2,7 +2,6 @@ package learningpath;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import actividad.Actividad;
 
 //Atributos
@@ -124,5 +123,36 @@ public class LearningPath {
         this.actividades = actividades;
     }
     
+    // métodos
 
+    public void agregarActividad(Actividad actividad){
+
+        this.actividades.add(actividad);  
+        actualizarDuracion();
+        this.fecha_modificacion = new Date();
+    }
+    
+    private void actualizarDuracion(){
+
+        int duracion_total= 0;
+        for (Actividad actividad: this.actividades){
+
+            duracion_total+= actividad.getDuracion();
+        }
+        this.duracion= duracion_total;
+
+    }
+
+    public void eliminarActividad(Actividad actividad){
+
+        int duracion_total= 0;
+        this.actividades.remove(actividad);
+        
+        for (Actividad act: this.actividades){
+
+            duracion_total+= act.getDuracion();
+        }
+        this.duracion= duracion_total;
+
+    }
 }
