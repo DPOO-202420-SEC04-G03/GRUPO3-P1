@@ -1,11 +1,13 @@
 package learningpath;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import actividad.Actividad;
 
-//Atributos
+// Atributos
 public class LearningPath {       
     private String titulo;
     private String descripcion;
@@ -13,15 +15,14 @@ public class LearningPath {
     private String nivel_dificultad;    // Principiante/Intermedio/Avanzado
     private int id_LP;
     private int duracion;
-    private double rating;
+    private List<Double> ratings; // Almacena múltiples calificaciones
     private Date fecha_creacion;
     private Date fecha_modificacion;
     private String version;
-    private String objetivo;  // Cambiado a String
+    private String objetivo;  
 
     // Constructor
     public LearningPath(String titulo, String descripcion, Set<Actividad> actividades, String nivel_dificultad, int id_LP, Date fecha_creacion, String version, String objetivo) {
-
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.actividades = new HashSet<>(actividades);
@@ -30,9 +31,9 @@ public class LearningPath {
         this.fecha_creacion = fecha_creacion;
         this.version = version;
         this.duracion = 0; // Inicialmente 0 hasta que se añadan actividades
-        this.rating = 0.0; // Inicialmente el rating es 0
+        this.ratings = new ArrayList<>(); // Inicializa una lista vacía de calificaciones
         this.fecha_modificacion = new Date(); // Inicializa con la fecha actual
-        this.objetivo = objetivo;  // Asignamos el objetivo como un String
+        this.objetivo = objetivo; 
         actualizarDuracion();
     }
 
@@ -86,12 +87,17 @@ public class LearningPath {
     }
 
     public double getRating() {
-        return this.rating;
-    }
 
-    public void setRating(double rating) {
-        this.rating = rating;
-        this.fecha_modificacion = new Date();
+        if (this.ratings.isEmpty()) {
+
+            return 0.0; 
+        }
+        double ratingtotal = 0;
+
+        for (double rating : this.ratings) {
+            ratingtotal += rating;
+        }
+        return ratingtotal / this.ratings.size(); 
     }
 
     public Date getFecha_creacion() {
@@ -151,13 +157,48 @@ public class LearningPath {
     public int cantidadActividades() {
         return this.actividades.size();
     }
-    
-    public void editarActividad(Actividad antigua, Actividad nueva){
-        for (Actividad a : this.actividades) {
-            if (a.equals(antigua)) {
-                a = nueva;
-            }
+
+    public void editarActividad(Actividad antigua, Actividad nueva) {
+        if(this.actividades.remove(antigua)) { 
+            this.actividades.add(nueva); 
+            actualizarDuracion();
+            this.fecha_modificacion = new Date(); 
         }
     }
 
+    public void agregarRating(double nuevoRating) {
+        // Añade un nuevo rating a la lista y actualiza la fecha de modificación
+        this.ratings.add(nuevoRating);
+        this.fecha_modificacion = new Date();
+    }
+
+    // Métodos estáticos para búsqueda, edición y eliminación de Learning Paths
+    public static LearningPath buscarLearningPath(Set<LearningPath> learningPaths, int id_LP) {
+        for (LearningPath lp : learningPaths) {
+            if (lp.getId_LP() == id_LP) {
+                return lp;
+            }
+        }
+        return null;
+    }
+
+    public static void editarLearningPath(Set<LearningPath> learningPaths, int id_LP, String nuevoTitulo, String nuevaDescripcion, String nuevoObjetivo, 
+                                            String nuevoNivelDificultad, String nuevaVersion) {
+        LearningPath learningPath = buscarLearningPath(learningPaths, id_LP);
+        if (learningPath != null) {
+            learningPath.setTitulo(nuevoTitulo);
+            learningPath.setDescripcion(nuevaDescripcion);
+            learningPath.setObjetivo(nuevoObjetivo);
+            learningPath.setNivel_dificultad(nuevoNivelDificultad);
+            learningPath.setVersion(nuevaVersion);
+            learningPath.setFecha_modificacion(new Date());  
+        }
+    }
+
+    public static void eliminarLearningPath(Set<LearningPath> learningPaths, int id_LP) {
+        LearningPath learningPath = buscarLearningPath(learningPaths, id_LP);
+        if (learningPath != null) {
+            learningPaths.remove(learningPath);  
+        }
+    }
 }
