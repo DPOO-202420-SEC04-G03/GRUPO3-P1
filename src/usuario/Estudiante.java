@@ -74,5 +74,11 @@ public class Estudiante extends Usuario {
         }
         return "No está inscrito en el LP: "+ id_learningpath;
     }
+
+    public void escribirResena(Actividad actividad, String resena){
+
+        actividad.agregarResena(resena);
+
+    }
     
 }

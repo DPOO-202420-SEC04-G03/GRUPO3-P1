@@ -188,4 +188,9 @@ public class Profesor extends Usuario {
         }
     }
 
+    public void escribirResena(Actividad actividad, String resena){
+
+        actividad.agregarResena(resena);
+
+    }
 }
