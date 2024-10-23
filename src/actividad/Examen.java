@@ -2,6 +2,7 @@ package actividad;
 import java.util.Date;
 import java.util.List;
 import pregunta.Pregunta;
+import java.util.ArrayList;
 
 public class Examen extends Actividad {
     private String estado_entrega;
@@ -9,7 +10,7 @@ public class Examen extends Actividad {
     private List<Pregunta> preguntas;
 
     // Constructor
-    public Examen(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, String resena, String tipo_actividad, 
+    public Examen(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, ArrayList<String> resena, String tipo_actividad, 
                     List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite,
                     String estado_entrega, Date fecha_entrega, List<Pregunta> preguntas, int duracion) {
         super(ID_actividad, descripcion, objetivo, nivel_dificultad, resena, tipo_actividad, actividades_sugeridas, prerrequisitos, fecha_limite, duracion);

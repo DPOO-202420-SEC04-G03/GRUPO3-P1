@@ -2,7 +2,7 @@ package actividad;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
+import java.util.ArrayList;
 import pregunta.Pregunta;
 
 
@@ -16,7 +16,7 @@ public class Quiz extends Actividad{
 
     //Constructor
 
-    public Quiz(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, String resena,
+    public Quiz(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, ArrayList<String> resena,
                 String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos,
                 Date fecha_limite, float calificacion_minima, float calificacion_obtenida, List<Pregunta> preguntas, int duracion) {
 

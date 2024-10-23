@@ -1,7 +1,7 @@
 package actividad;
 import java.util.Date;
 import java.util.List;
-
+import java.util.ArrayList;
 // Atributos
 public class Tarea extends Actividad { 
 
@@ -12,7 +12,7 @@ public class Tarea extends Actividad {
 
     //Constructor
 
-    public Tarea(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, String resena, String tipo_actividad,
+    public Tarea(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, ArrayList<String> resena, String tipo_actividad,
                 List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite, String estadoEntrega,
                 Date fechaEntrega, String medioEntrega, int duracion) {
                     
@@ -23,8 +23,8 @@ public class Tarea extends Actividad {
     }
     
     //getters y setters
-
-
+    
+    
     public String getEstado_entrega() {
         return this.estado_entrega;
     }

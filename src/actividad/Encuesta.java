@@ -1,4 +1,5 @@
 package actividad;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Encuesta extends Actividad {
 
     //Constructor
 
-    public Encuesta(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
+    public Encuesta(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , ArrayList<String> resena, String tipo_actividad,
                     List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite, String estado_entrega,
                     List<Pregunta> preguntas, int duracion){
 

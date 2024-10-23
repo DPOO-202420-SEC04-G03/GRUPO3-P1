@@ -2,6 +2,7 @@ package actividad;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 public class RecursoEducativo extends Actividad {
 
@@ -9,7 +10,7 @@ public class RecursoEducativo extends Actividad {
     private String url;
 
     // Constructor
-    public RecursoEducativo(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, String resena, 
+    public RecursoEducativo(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad, ArrayList<String> resena, 
                             String tipo_actividad, List<Actividad> actividades_sugeridas, boolean prerrequisitos, 
                             Date fecha_limite, String tipoRecurso, String url, int duracion) {
         

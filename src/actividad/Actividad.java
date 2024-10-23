@@ -11,7 +11,7 @@ public abstract class Actividad {
     private String descripcion;
     private String objetivo;
     private String nivel_dificultad ;  // Principiante/Intermedio/Avanzado
-    private String resena;
+    private ArrayList<String> resenas;
     private String tipo_actividad;
     private List<Actividad> actividades_sugeridas;
     private boolean prerrequisitos;
@@ -21,13 +21,13 @@ public abstract class Actividad {
 
     //Constructor
 
-    public Actividad(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , String resena, String tipo_actividad,
+    public Actividad(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad , ArrayList<String> resena, String tipo_actividad,
                 List<Actividad> actividades_sugeridas, boolean prerrequisitos, Date fecha_limite, int duracion) {
         this.ID_actividad = ID_actividad;
         this.descripcion = descripcion;
         this.objetivo = objetivo;
         this.nivel_dificultad  = nivel_dificultad ;
-        this.resena = resena;
+        this.resenas = resena;
         this.tipo_actividad = tipo_actividad;
         this.actividades_sugeridas = actividades_sugeridas;
         this.prerrequisitos = prerrequisitos;
@@ -71,13 +71,14 @@ public abstract class Actividad {
     }
     
 
-    public String getResena() {
-        return this.resena;
+    public ArrayList<String> getResena() {
+        return this.resenas;
     }
 
-    public void setResena(String resena) {
-        this.resena = resena;
+    public void setResena(ArrayList<String> resena) {
+        this.resenas = resena;
     }
+    
 
     public String getTipo_actividad() {
         return this.tipo_actividad;
@@ -122,6 +123,11 @@ public abstract class Actividad {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    public void agregarResena(String resena){
+
+        this.resenas.add(resena);
     }
 
 }
