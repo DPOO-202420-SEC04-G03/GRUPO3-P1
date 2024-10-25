@@ -96,37 +96,87 @@ public class Profesor extends Usuario {
         }
     }
 
-    public Actividad crearActividad(int ID_actividad, String descripcion, String objetivo, String nivel_dificultad,
-            String recurso,
-            List<Actividad> actividades_sugeridas, boolean prerequisitos, Date fecha_limite, int duracion,
-            String tipo_actividad, BufferedReader lector) {
+    public actividad.Actividad crearActividad(int ID_actividad, String descripcion, String objetivo,
+            String nivel_dificultad,
+            String recurso, List<actividad.Actividad> actividades_sugeridas, boolean prerequisitos, Date fecha_limite,
+            int duracion, String tipo_actividad, BufferedReader lector) {
 
         actividad.Actividad actividad;
 
-        // completar x cada actividad
+        // Encuesta
         if (tipo_actividad.equals("encuesta")) {
-            /*
-             * System.out.println("Digite el estado: ");
-             * try {
-             * String estado= lector.readLine();
-             * } catch (IOException e) {
-             * // TODO Auto-generated catch block
-             * e.printStackTrace();
-             * }
-             */
-            return new actividad.Encuesta(ID_actividad, descripcion, objetivo, nivel_dificultad, recurso,
-                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, "No enviado", new ArrayList<>(),
+            System.out.println("Digite el estado de la encuesta: ");
+            String estado = "";
+            try {
+                estado = lector.readLine();
+            } catch (IOException e) {
+                System.out.println("Error leyendo el estado.");
+            }
+            return new actividad.Encuesta(ID_actividad, descripcion, objetivo, nivel_dificultad, new ArrayList<>(),
+                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, estado, new ArrayList<>(),
                     duracion);
-        } else if (tipo_actividad.equals("quiz")) {
-        } else if (tipo_actividad.equals("examen")) {
-        } else if (tipo_actividad.equals("recurso")) {
-        } else {
-            return new actividad.Encuesta(ID_actividad, descripcion, objetivo, nivel_dificultad, recurso,
-                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, "No enviado", new ArrayList<>(),
-                    duracion);
-        }
-        // return actividad;
 
+            // Quiz
+        } else if (tipo_actividad.equals("quiz")) {
+            System.out.println("Digite la calificación mínima: ");
+            float calificacion_minima = 0;
+            try {
+                calificacion_minima = Float.parseFloat(lector.readLine());
+            } catch (IOException e) {
+                System.out.println("Error leyendo las calificaciones.");
+            }
+            return new actividad.Quiz(ID_actividad, descripcion, objetivo, nivel_dificultad, new ArrayList<>(),
+                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, calificacion_minima, 0,
+                    new ArrayList<>(), duracion);
+
+            // Examen
+        } else if (tipo_actividad.equals("examen")) {
+            System.out.println("Digite el estado de entrega del examen: ");
+            String estado_entrega = "";
+            String fecha_entrega_texto = "";
+            Date fecha_entrega = new Date();
+            try {
+                estado_entrega = lector.readLine();
+                System.out.println("Digite la fecha de entrega (aaaa-mm-dd): ");
+                fecha_entrega_texto = lector.readLine();
+                fecha_entrega = new Date(); // Valor placeholder
+            } catch (IOException e) {
+                System.out.println("Error leyendo el estado o la fecha.");
+            }
+            return new actividad.Examen(ID_actividad, descripcion, objetivo, nivel_dificultad, new ArrayList<>(),
+                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, estado_entrega, fecha_entrega,
+                    new ArrayList<>(), duracion);
+
+            // Recurso Educativo
+        } else if (tipo_actividad.equals("recurso")) {
+            return new actividad.RecursoEducativo(ID_actividad, descripcion, objetivo, nivel_dificultad,
+                    new ArrayList<>(),
+                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, recurso, recurso, duracion);
+
+            // Tarea
+        } else if (tipo_actividad.equals("tarea")) {
+            System.out.println("Digite el estado de entrega de la tarea: ");
+            String estado_entrega = "";
+            String fecha_entrega_texto = "";
+            String medio_entrega = "";
+            Date fecha_entrega = new Date();
+            try {
+                estado_entrega = lector.readLine();
+                System.out.println("Digite la fecha de entrega (aaaa-mm-dd): ");
+                fecha_entrega_texto = lector.readLine();
+                System.out.println("Digite el medio de entrega: ");
+                medio_entrega = lector.readLine();
+            } catch (IOException e) {
+                System.out.println("Error leyendo los datos.");
+            }
+            return new actividad.Tarea(ID_actividad, descripcion, objetivo, nivel_dificultad, new ArrayList<>(),
+                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, estado_entrega, fecha_entrega,
+                    medio_entrega, duracion);
+        }
+
+        return new actividad.Encuesta(ID_actividad, descripcion, objetivo, nivel_dificultad, new ArrayList<>(),
+                tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, "No enviado", new ArrayList<>(),
+                duracion);
     }
 
     public void evaluarEstudiante(int id_estudiante, int id_learningpath, BufferedReader lector) {
@@ -171,10 +221,10 @@ public class Profesor extends Usuario {
 
                 if (examen.getEstado_entrega().equals("Enviado")) {
 
-                    System.out.println("Digite la calificación para el examen "+ examen.getID_actividad()+ ": ");
+                    System.out.println("Digite la calificación para el examen " + examen.getID_actividad() + ": ");
                     try {
                         String calificacion = lector.readLine();
-                        double cali= Double.parseDouble(calificacion);
+                        double cali = Double.parseDouble(calificacion);
                         estu.agregarCalificacion(cali);
                         examen.setEstado_entrega("Revisado");
                         System.out.println("Calificación guaradada");
@@ -188,7 +238,7 @@ public class Profesor extends Usuario {
         }
     }
 
-    public void escribirResena(Actividad actividad, String resena){
+    public void escribirResena(Actividad actividad, String resena) {
 
         actividad.agregarResena(resena);
 
