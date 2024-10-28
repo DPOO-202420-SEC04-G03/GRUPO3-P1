@@ -21,16 +21,30 @@ import actividad.Examen;
 import actividad.Quiz;
 import actividad.RecursoEducativo;
 import actividad.Tarea;
+import pregunta.Pregunta;
+import pregunta.PreguntaAbierta;
+import pregunta.PreguntaOpcionMultiple;
 
 public class PersistenciaActividades {
+    
+
+    
+    
+    
 
     private String rutaArchivo;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
 
-    public PersistenciaActividades(String rutaArchivo) {
+    private HashMap<Integer, Actividad> actividades;
 
+    public PersistenciaActividades(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
+        
     }
+
+    public Actividad obtenerActividadPorID(int idActividad) {
+        return actividades.get(idActividad);}
+    
 
     public HashMap<Integer,Actividad> CargarActividades() {
         HashMap<Integer,Actividad> actividades = new HashMap<>();
@@ -65,23 +79,131 @@ public class PersistenciaActividades {
                             actividadessugeridas, prerrequisitos, fechaLimite, estadoEntregaTarea,fechaEntrega, medioEntregaTarea,
                             duracion);
                     actividades.put(id,tarea);
+                    
 
                 } else if (tipo.equals("Quiz")) {
-                    
-        
+                        float calificacion_minima = Float.parseFloat(partes[10]);
+                        float calificacion_obtenida = Float.parseFloat(partes[11]);
+                        List<Pregunta> preguntas = new ArrayList<>();
+                        String[] preguntasArray = partes[12].split(","); // Cambia el delimitador según tu formato
+
+                        for (String preguntaTexto : preguntasArray) {
+                        // Divide el texto en sus componentes según el tipo de pregunta
+                        String[] detalles = preguntaTexto.trim().split(":");
+
+                        String tipoPregunta = detalles[0].trim();
+                        int idPregunta = Integer.parseInt(detalles[1].trim());
+                        String descripcionPregunta = detalles[2].trim();
+                        int calificacionPregunta = Integer.parseInt(detalles[3].trim());
+
+                        if (tipoPregunta.equals("Abierta")) {
+                        // Si es una pregunta abierta
+                        String estadoEntrega = detalles[4].trim();
+                        String respuestaEstudiante = detalles[5].trim();
+
+                        Pregunta pregunta = new PreguntaAbierta(idPregunta, descripcionPregunta, calificacionPregunta, estadoEntrega, respuestaEstudiante);
+                        preguntas.add(pregunta);
+
+                        } else if (tipoPregunta.equals("OpcionMultiple")) {
+                        // Si es una pregunta de opción múltiple
+                        List<String> opciones = List.of(detalles[4].trim().split(","));
+                        String opcionCorrecta = detalles[5].trim();
+                        String explicacion = detalles[6].trim();
+                        Pregunta pregunta = new PreguntaOpcionMultiple(idPregunta, descripcionPregunta, calificacionPregunta, opciones, opcionCorrecta, explicacion);
+                        preguntas.add(pregunta);
+                        }
+                        }
+                        // Crear la instancia de Quiz con la lista de preguntas
+                        Quiz quiz = new Quiz(id, description, objetivo, niveldedificultad, resenas, "Quiz",
+                                actividadessugeridas, prerrequisitos, fechaLimite, calificacion_minima, 
+                                calificacion_obtenida, preguntas, duracion);
+                        actividades.put(id, quiz);
+
 
                 } else if (tipo.equals("Examen")) {
-
+                                    String estado_entrega = partes[10];
+                                    Date fecha_entrega = convertirFecha(partes[11]); // Método para convertir la fecha de String a Date
+                                    List<Pregunta> preguntas = new ArrayList<>();
+                                    String[] preguntasArray = partes[12].split(","); // Cambia el delimitador según tu formato
+                                
+                                    for (String preguntaTexto : preguntasArray) {
+                                        // Divide el texto en sus componentes según el tipo de pregunta
+                                        String[] detalles = preguntaTexto.trim().split(":");
+                                
+                                        String tipoPregunta = detalles[0].trim();
+                                        int idPregunta = Integer.parseInt(detalles[1].trim());
+                                        String descripcionPregunta = detalles[2].trim();
+                                        int calificacionPregunta = Integer.parseInt(detalles[3].trim());
+                                
+                                        if (tipoPregunta.equals("Abierta")) {
+                                            // Si es una pregunta abierta
+                                            String estadoEntrega = detalles[4].trim();
+                                            String respuestaEstudiante = detalles[5].trim();
+                                
+                                            Pregunta pregunta = new PreguntaAbierta(idPregunta, descripcionPregunta, calificacionPregunta, estadoEntrega, respuestaEstudiante);
+                                            preguntas.add(pregunta);
+                                
+                                        } else if (tipoPregunta.equals("OpcionMultiple")) {
+                                            // Si es una pregunta de opción múltiple
+                                            List<String> opciones = List.of(detalles[4].trim().split(","));
+                                            String opcionCorrecta = detalles[5].trim();
+                                            String explicacion = detalles[6].trim();
+                                
+                                            Pregunta pregunta = new PreguntaOpcionMultiple(idPregunta, descripcionPregunta, calificacionPregunta, opciones, opcionCorrecta, explicacion);
+                                            preguntas.add(pregunta);
+                                        }
+                                    }
+                                    // Crear la instancia de Examen con la lista de preguntas
+                                    Examen examen = new Examen(id, description, objetivo, niveldedificultad, resenas, "Examen",
+                                                            actividadessugeridas, prerrequisitos, fechaLimite, estado_entrega,
+                                                            fecha_entrega, preguntas, duracion);
+                                    actividades.put(id, examen);
                 } else if (tipo.equals("Encuesta")) {
-
+                            String estado_entrega = partes[10];
+                            List<Pregunta> preguntas = new ArrayList<>();
+                            String[] preguntasArray = partes[11].split(","); // Cambia el delimitador según tu formato
+                        
+                            for (String preguntaTexto : preguntasArray) {
+                               
+                                String[] detalles = preguntaTexto.trim().split(":");
+                        
+                                int idPregunta = Integer.parseInt(detalles[0].trim());
+                                String descripcionPregunta = detalles[1].trim();
+                                int calificacionPregunta = Integer.parseInt(detalles[2].trim());
+                                String estadoEntregaPregunta = detalles[3].trim();
+                                String respuestaEstudiante = detalles[4].trim();
+                        
+                                
+                                Pregunta pregunta = new PreguntaAbierta(idPregunta, descripcionPregunta, calificacionPregunta, estadoEntregaPregunta, respuestaEstudiante);
+                                preguntas.add(pregunta);
+                            }
+                        
+                            
+                            Encuesta encuesta = new Encuesta(id, description, objetivo, niveldedificultad, resenas, "Encuesta",
+                                                            actividadessugeridas, prerrequisitos, fechaLimite, estado_entrega,
+                                                            preguntas, duracion);
+                            actividades.put(id, encuesta);
+                        
                 } else if (tipo.equals("RecursoEducativo")) {
-
-                }
-            }
-        } catch (IOException e) {
+                            String tipoRecurso = partes[10];
+                            String url = partes[11];
+                            
+                            
+                            RecursoEducativo recursoEducativo = new RecursoEducativo(id, description, objetivo, niveldedificultad, resenas,
+                                    "RecursoEducativo", actividadessugeridas, prerrequisitos, fechaLimite, tipoRecurso, url, duracion);
+                        
+                            actividades.put(id, recursoEducativo);
+                        }
+                        
+        }} catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
         return actividades;
+
+
+
+
+
 
     }
     public void PersistirActividades(HashMap<Integer,Actividad> existentes){
@@ -113,20 +235,79 @@ public class PersistenciaActividades {
                     sb.append(tarea.getFecha_entrega()).append(';');
                     sb.append(tarea.getMedio_entrega());
                 } else if (actividad instanceof Quiz) {
-                    Quiz quiz = (Quiz) actividad;
+                            Quiz quiz = (Quiz) actividad;
+                            sb.append(quiz.getCalificacion_minima()).append(";");
+                            sb.append(quiz.getCalificacion_obtenida()).append(";");
+                            // Procesar cada pregunta en la lista de preguntas del Quiz
+                            for (Pregunta pregunta : quiz.getPreguntas()) {
+                                if (pregunta instanceof PreguntaAbierta) {
+                                    PreguntaAbierta abierta = (PreguntaAbierta) pregunta;
+                                    sb.append("Abierta:").append(abierta.getID_pregunta()).append(":")
+                                    .append(abierta.getDescripcion()).append(":")
+                                    .append(abierta.getCalificacion()).append(":")
+                                    .append(abierta.getEstado_entrega()).append(":")
+                                    .append(abierta.getRespuesta_estudiante()).append(",");
+                                } else if (pregunta instanceof PreguntaOpcionMultiple) {
+                                    PreguntaOpcionMultiple opcionMultiple = (PreguntaOpcionMultiple) pregunta;
+                                    sb.append("OpcionMultiple:").append(opcionMultiple.getID_pregunta()).append(":")
+                                    .append(opcionMultiple.getDescripcion()).append(":")
+                                    .append(opcionMultiple.getCalificacion()).append(":")
+                                    .append(String.join(",", opcionMultiple.getOpciones())).append(":")
+                                    .append(opcionMultiple.getOpcion_correcta()).append(":")
+                                    .append(opcionMultiple.getExplicacion()).append(",");
+                                }
+                            }
+
                     
                 } else if (actividad instanceof Examen) {
                     Examen examen = (Examen) actividad;
-                    
+                    sb.append(examen.getEstado_entrega()).append(";");
+                    String fechaEntregaStr = dateFormat.format(examen.getFecha_entrega());
+                    sb.append(fechaEntregaStr).append(";");
+                    for (Pregunta pregunta : examen.getPreguntas()) {
+                        if (pregunta instanceof PreguntaAbierta) {
+                            PreguntaAbierta abierta = (PreguntaAbierta) pregunta;
+                            sb.append("Abierta:").append(abierta.getID_pregunta()).append(":")
+                            .append(abierta.getDescripcion()).append(":")
+                            .append(abierta.getCalificacion()).append(":")
+                            .append(abierta.getEstado_entrega()).append(":")
+                            .append(abierta.getRespuesta_estudiante()).append(",");
+                        } else if (pregunta instanceof PreguntaOpcionMultiple) {
+                            PreguntaOpcionMultiple opcionMultiple = (PreguntaOpcionMultiple) pregunta;
+                            sb.append("OpcionMultiple:").append(opcionMultiple.getID_pregunta()).append(":")
+                            .append(opcionMultiple.getDescripcion()).append(":")
+                            .append(opcionMultiple.getCalificacion()).append(":")
+                            .append(String.join(",", opcionMultiple.getOpciones())).append(":")
+                            .append(opcionMultiple.getOpcion_correcta()).append(":")
+                            .append(opcionMultiple.getExplicacion()).append(",");
+                        }
+                    }
+
+
                 } else if (actividad instanceof Encuesta) {
                     Encuesta encuesta = (Encuesta) actividad;
-                    
+                    sb.append(encuesta.getEstado_entrega()).append(";");
+                    for (Pregunta pregunta : encuesta.getPreguntas()) {
+                        if (pregunta instanceof PreguntaAbierta) {
+                            PreguntaAbierta abierta = (PreguntaAbierta) pregunta;
+                            sb.append("Abierta:").append(abierta.getID_pregunta()).append(":")
+                              .append(abierta.getDescripcion()).append(":")
+                              .append(abierta.getCalificacion()).append(":")
+                              .append(abierta.getEstado_entrega()).append(":")
+                              .append(abierta.getRespuesta_estudiante()).append(",");
+                        }
+                    }
+
+                    // Eliminar la última coma si hay preguntas
+                    if (!encuesta.getPreguntas().isEmpty()) {
+                        sb.deleteCharAt(sb.length() - 1);
+                    }
+
                 } else if (actividad instanceof RecursoEducativo) {
                     RecursoEducativo recurso = (RecursoEducativo) actividad;
-                    
+                    sb.append(recurso.getTipoRecurso()).append(";");
+                    sb.append(recurso.getUrl());
                 }
-
-                // Escribe la línea al archivo
                 writer.write(sb.toString());
                 writer.newLine(); // Salto de línea para la siguiente actividad
             }
