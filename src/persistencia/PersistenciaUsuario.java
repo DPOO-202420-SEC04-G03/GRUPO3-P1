@@ -7,7 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import usuario.Estudiante;
 import usuario.Profesor;
 import usuario.Usuario;
@@ -37,8 +40,13 @@ public class PersistenciaUsuario {
                 
                 // Verifica el tipo de usuario
                 if (tipoUsuario.equals("Profesor")) {
-                    // Crear una instancia de Profesor
-                    usuario = new Profesor(idUsuario, login, password, new ArrayList<LearningPath>());
+                    Set <LearningPath> creados = new HashSet<>();
+                    for (String id: partes[4].split(",")){
+                        creados.add(Recommendation.obtenerLearningPath(Integer.parseInt(id)));
+                    }
+                    Profesor profe = new Profesor(idUsuario, login, password);
+                    profe.setLearningPathsCreados(creados);
+                    usuario = profe;
                 } else if (tipoUsuario.equals("Estudiante")) {
                     // Crear una instancia de Estudiante
                     usuario = new Estudiante(idUsuario, login, password, new ArrayList<LearningPath>());
@@ -60,18 +68,18 @@ public class PersistenciaUsuario {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             for (Usuario usuario : usuarios.values()) {
                 StringBuilder sb = new StringBuilder();
-                
+
                 // Agrega el tipo de usuario al principio de la línea
                 if (usuario instanceof Profesor) {
                     sb.append("Profesor;");
                 } else if (usuario instanceof Estudiante) {
                     sb.append("Estudiante;");
                 }
-                
+
                 sb.append(usuario.getId_usuario()).append(";")
-                  .append(usuario.getLogin()).append(";")
-                  .append(usuario.getPassword());
-                
+                        .append(usuario.getLogin()).append(";")
+                        .append(usuario.getPassword());
+
                 // Escribe la línea al archivo
                 writer.write(sb.toString());
                 writer.newLine(); // Salto de línea para el siguiente usuario

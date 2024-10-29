@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import learningpath.LearningPath;
+import persistencia.Recommendation;
 import pregunta.Pregunta;
 import actividad.Actividad;
 import actividad.Examen;
@@ -97,8 +98,7 @@ public class Profesor extends Usuario {
     }
 
     public actividad.Actividad crearActividad(int ID_actividad, String descripcion, String objetivo,
-            String nivel_dificultad,
-            String recurso, List<actividad.Actividad> actividades_sugeridas, boolean prerequisitos, Date fecha_limite,
+            String nivel_dificultad, List<actividad.Actividad> actividades_sugeridas, boolean prerequisitos, Date fecha_limite,
             int duracion, String tipo_actividad, BufferedReader lector) {
 
         actividad.Actividad actividad;
@@ -149,9 +149,20 @@ public class Profesor extends Usuario {
 
             // Recurso Educativo
         } else if (tipo_actividad.equals("recurso")) {
+            
+                System.out.println("Digite el tipo  de recurso: ");
+                String tiporecurso = "";
+                String url = "";
+                try {
+                    tiporecurso = lector.readLine();
+                    System.out.println("Digite la url: ");
+                    url = lector.readLine();
+                } catch (IOException e) {
+                    System.out.println("Error leyendo el estado o la fecha.");
+                }
             return new actividad.RecursoEducativo(ID_actividad, descripcion, objetivo, nivel_dificultad,
                     new ArrayList<>(),
-                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, recurso, recurso, duracion);
+                    tipo_actividad, actividades_sugeridas, prerequisitos, fecha_limite, tiporecurso,url , duracion);
 
             // Tarea
         } else if (tipo_actividad.equals("tarea")) {
@@ -181,7 +192,8 @@ public class Profesor extends Usuario {
 
     public void evaluarEstudiante(int id_estudiante, int id_learningpath, BufferedReader lector) {
 
-        boolean centinela_profesor, centinela_estudiante = false;
+        boolean centinela_profesor = false;
+        boolean centinela_estudiante = false;
 
         for (LearningPath lp : this.learningPathsCreados) {
 

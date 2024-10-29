@@ -50,9 +50,11 @@ public class PersistenciaActividades {
         HashMap<Integer,Actividad> actividades = new HashMap<>();
         try (BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
+            lector.readLine();
             while ((linea = lector.readLine()) != null) {
                 String[] partes = (linea.split(";"));
                 String tipo = partes[0];
+                
                 int id = Integer.parseInt(partes[1]);
                 String description = partes[2];
                 String objetivo = partes[3];
@@ -61,6 +63,7 @@ public class PersistenciaActividades {
                 String [] sugeridasstStrings = partes[6].split(",");
                 int [] sugeridas = new int [sugeridasstStrings.length];
                 for (int i = 0; i < sugeridasstStrings.length; i++){
+                    if (sugeridasstStrings[i].equals("")) continue;
                     sugeridas[i] = Integer.parseInt(sugeridasstStrings[i]);
                 }
                 ArrayList <Actividad> actividadessugeridas = new ArrayList<>();

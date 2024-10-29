@@ -129,5 +129,39 @@ public abstract class Actividad {
 
         this.resenas.add(resena);
     }
+    public String print() {
+        StringBuilder respuesta = new StringBuilder();
+        respuesta.append("ID Actividad: ").append(ID_actividad).append("\n");
+        respuesta.append("Descripción: ").append(descripcion).append("\n");
+        respuesta.append("Objetivo: ").append(objetivo).append("\n");
+        respuesta.append("Nivel de Dificultad: ").append(nivel_dificultad).append("\n");
+        respuesta.append("Tipo de Actividad: ").append(tipo_actividad).append("\n");
+        respuesta.append("Prerrequisitos: ").append(prerrequisitos ? "Sí" : "No").append("\n");
+        respuesta.append("Fecha Límite: ").append(fecha_limite != null ? fecha_limite.toString() : "Sin fecha límite").append("\n");
+        respuesta.append("Duración: ").append(duracion).append(" minutos\n");
+    
+        // Añadir las reseñas, si existen
+        if (resenas != null && !resenas.isEmpty()) {
+            respuesta.append("Reseñas:\n");
+            for (String resena : resenas) {
+                respuesta.append(" - ").append(resena).append("\n");
+            }
+        } else {
+            respuesta.append("Reseñas: No hay reseñas disponibles.\n");
+        }
+    
+        // Añadir actividades sugeridas, si existen
+        if (actividades_sugeridas != null && !actividades_sugeridas.isEmpty()) {
+            respuesta.append("Actividades Sugeridas:\n");
+            for (Actividad actividad : actividades_sugeridas) {
+                respuesta.append(" - ").append(actividad.ID_actividad).append(" - ").append(actividad.descripcion).append("\n");
+            }
+        } else {
+            respuesta.append("Actividades Sugeridas: No hay actividades sugeridas.\n");
+        }
+    
+        return respuesta.toString();
+    }
+    
 
 }
