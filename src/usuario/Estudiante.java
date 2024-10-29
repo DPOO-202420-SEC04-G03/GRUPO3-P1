@@ -80,5 +80,27 @@ public class Estudiante extends Usuario {
         actividad.agregarResena(resena);
 
     }
+    public void realizarActividad(Actividad actividad, int idLearningPath) {
+        // Obtener el conjunto de actividades realizadas para el Learning Path específico
+        Set<Actividad> actividadesRealizadas = actividades_realizadas_por_LP.getOrDefault(idLearningPath, new HashSet<>());
+    
+        // Añadir la actividad al conjunto
+        actividadesRealizadas.add(actividad);
+    
+        // Actualizar el mapa
+        actividades_realizadas_por_LP.put(idLearningPath, actividadesRealizadas);
+    }
+    public void verProgreso() {
+        for (LearningPath lp : LearningPathInscritos) {
+            int totalActividades = lp.getActividades().size();
+            int actividadesCompletadas = actividades_realizadas_por_LP.getOrDefault(lp.getId_LP(), new HashSet<>()).size();
+    
+            double porcentajeCompletado = totalActividades > 0 ? (actividadesCompletadas * 100.0) / totalActividades : 0;
+            
+            System.out.println("Learning Path: " + lp.getTitulo());
+            System.out.println("Progreso: " + actividadesCompletadas + "/" + totalActividades + " actividades completadas (" + porcentajeCompletado + "%)");
+        }
+    }
+    
     
 }

@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import actividad.Actividad;
+import java.text.SimpleDateFormat;
+
 
 // Atributos
 public class LearningPath {       
@@ -201,4 +203,38 @@ public class LearningPath {
             learningPaths.remove(learningPath);  
         }
     }
+    public String print() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        StringBuilder respuesta = new StringBuilder();
+
+        respuesta.append("ID Learning Path: ").append(id_LP).append("\n");
+        respuesta.append("Título: ").append(titulo).append("\n");
+        respuesta.append("Descripción: ").append(descripcion).append("\n");
+        respuesta.append("Objetivo: ").append(objetivo).append("\n");
+        respuesta.append("Nivel de Dificultad: ").append(nivel_dificultad).append("\n");
+        respuesta.append("Fecha de Creación: ").append(fecha_creacion != null ? dateFormat.format(fecha_creacion) : "No especificada").append("\n");
+        respuesta.append("Fecha de Modificación: ").append(fecha_modificacion != null ? dateFormat.format(fecha_modificacion) : "No especificada").append("\n");
+        respuesta.append("Versión: ").append(version).append("\n");
+        respuesta.append("Duración Total: ").append(duracion).append(" minutos\n");
+
+        // Mostrar el promedio de ratings si existen
+        if (ratings != null && !ratings.isEmpty()) {
+            respuesta.append("Rating Promedio: ").append(getRating()).append("\n");
+        } else {
+            respuesta.append("Rating: No hay calificaciones disponibles.\n");
+        }
+
+        // Mostrar actividades, si existen
+        if (actividades != null && !actividades.isEmpty()) {
+            respuesta.append("Actividades:\n");
+            for (Actividad actividad : actividades) {
+                respuesta.append(" - ID: ").append(actividad.getID_actividad()).append(", Descripción: ").append(actividad.getDescripcion()).append(", Duración: ").append(actividad.getDuracion()).append(" minutos\n");
+            }
+        } else {
+            respuesta.append("Actividades: No hay actividades registradas.\n");
+        }
+
+        return respuesta.toString();
+    }
 }
+

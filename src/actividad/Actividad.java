@@ -17,6 +17,7 @@ public abstract class Actividad {
     private boolean prerrequisitos;
     private Date fecha_limite;
     private int duracion;
+    private ArrayList<Double> calificaciones = new ArrayList<>();
 
 
     //Constructor
@@ -36,6 +37,10 @@ public abstract class Actividad {
     }
 
     //setters y getters
+
+
+
+
 
 
     public int getID_actividad() {
@@ -129,6 +134,13 @@ public abstract class Actividad {
 
         this.resenas.add(resena);
     }
+
+    public void agregarCalificacion(double calificacion) {
+        this.calificaciones.add(calificacion);
+    }
+
+
+
     public String print() {
         StringBuilder respuesta = new StringBuilder();
         respuesta.append("ID Actividad: ").append(ID_actividad).append("\n");
