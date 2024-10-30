@@ -81,10 +81,9 @@ public class Estudiante extends Usuario {
 
     }
     public void realizarActividad(Actividad actividad, int idLearningPath) {
-        // Obtener el conjunto de actividades realizadas para el Learning Path específico
+        
         Set<Actividad> actividadesRealizadas = actividades_realizadas_por_LP.getOrDefault(idLearningPath, new HashSet<>());
     
-        // Añadir la actividad al conjunto
         actividadesRealizadas.add(actividad);
     
         // Actualizar el mapa
