@@ -84,9 +84,9 @@ public class Estudiante extends Usuario {
         
         Set<Actividad> actividadesRealizadas = actividades_realizadas_por_LP.getOrDefault(idLearningPath, new HashSet<>());
     
+        
         actividadesRealizadas.add(actividad);
     
-        // Actualizar el mapa
         actividades_realizadas_por_LP.put(idLearningPath, actividadesRealizadas);
     }
     public void verProgreso() {
