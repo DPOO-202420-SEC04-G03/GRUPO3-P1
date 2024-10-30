@@ -22,9 +22,9 @@ public class PersistenciaLearningPath {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
     private PersistenciaActividades persistenciaActividades;
 
-    public PersistenciaLearningPath(String rutaArchivo, PersistenciaActividades persistenciaActividades) {
+    public PersistenciaLearningPath(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
-        this.persistenciaActividades = persistenciaActividades;
+        
     }
 
     public HashMap<Integer, LearningPath> cargarLearningPaths() {

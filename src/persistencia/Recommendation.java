@@ -38,23 +38,23 @@ public class Recommendation {
         Recommendation recommendation = new Recommendation();
         recommendation.cargarActividades();
 
-        recommendation.cargarLearningPaths();
-        recommendation.cargarUsuarios ();
+        //recommendation.cargarLearningPaths();
+        //recommendation.cargarUsuarios ();
 
-        recommendation.req1CrearLP();
-        recommendation.req2EliminarLp();
+        //recommendation.req1CrearLP();
+        //recommendation.req2EliminarLp();
         recommendation.req3CrearActividad();
         recommendation.req4EliminarActividad();
-        recommendation.req5EvaluarActividad();
-        recommendation.req6InscribirseALp();
-        recommendation.req7RealizarActividad();
-        recommendation.req8VerProgreso();
-        recommendation.req9DuracionLp();
-        recommendation.req10EscribirResena();
+        //recommendation.req5EvaluarActividad();
+        //recommendation.req6InscribirseALp();
+        //recommendation.req7RealizarActividad();
+        //recommendation.req8VerProgreso();
+        //recommendation.req9DuracionLp();
+        //recommendation.req10EscribirResena();
 
     }
 
-
+    /* 
     public void cargarUsuarios() {
         System.out.println("Cargando Usuarios...");
         PersistenciaUsuario persistencia = new PersistenciaUsuario(
@@ -68,13 +68,12 @@ public class Recommendation {
             System.out.println("Primer usuario cargado: ID = " + primerUsuario.getId_usuario() +", Tipo = " + (primerUsuario instanceof Profesor ? "Profesor" : "Estudiante") +", Login = " + primerUsuario.getLogin());
         }
     }
-    
+    /* 
     public void cargarLearningPaths() {
         System.out.println("Cargando Learning Paths...");
     
         PersistenciaLearningPath carga = new PersistenciaLearningPath(
-                "C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\LearningPath.txt",
-                new PersistenciaActividades("C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\actividades.txt"));
+            "C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\LearningPath.txt");
         this.learningpaths = carga.cargarLearningPaths();
     
         System.out.println("Learning Paths cargados: " + this.learningpaths.size());
@@ -83,7 +82,7 @@ public class Recommendation {
             LearningPath primerLearningPath = this.learningpaths.values().iterator().next();
             System.out.println("Primer Learning Path cargado:\n" + primerLearningPath.print());
         }
-    }
+    }*/
     
     
 
@@ -97,7 +96,7 @@ public class Recommendation {
 
     }
 
-    public void req1CrearLP() {
+    /*public void req1CrearLP() {
         System.out.println("Creando Learning Path...");
         
         // Configuración de datos de ejemplo, similar a `req3CrearActividad`
@@ -125,13 +124,13 @@ public class Recommendation {
         System.out.println(nuevoLP.print());
         System.out.println("Learning Path añadido.");
         System.out.println("Learning Paths existentes: " + this.learningpaths.size());
-    }
+    }*/
     
     
 
 
 
-    public void req2EliminarLp() {
+    /*public void req2EliminarLp() {
         System.out.println("Eliminando Learning Path...");
         if (learningpaths.containsKey(1001)) {
             learningpaths.remove(1001);
@@ -139,7 +138,7 @@ public class Recommendation {
         } else {
             System.out.println("Learning Path no encontrado.");
         }
-    }
+    }*/
 
 
 
@@ -173,10 +172,10 @@ public class Recommendation {
         System.out.println("Actividad Eliminada");
         System.out.println("Actividades existentes:  " + this.actividades.size());
 
-    }
+    }}
 
 
-
+    /* 
     public void req5EvaluarActividad() {
         System.out.println("Evaluando Actividad...");
         Scanner scanner = new Scanner(System.in);
@@ -308,7 +307,7 @@ public void req8VerProgreso() {
 
     }
         */
-
+    /* 
     public static LearningPath obtenerLearningPath(int id) {
         return instance.learningpaths.get(id);
     }
@@ -320,4 +319,4 @@ public void req8VerProgreso() {
         return null;
 
     }
-}
+}*/
