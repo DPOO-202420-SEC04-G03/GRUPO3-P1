@@ -39,7 +39,7 @@ public class Recommendation {
         recommendation.cargarActividades();
 
         recommendation.cargarLearningPaths();
-        //recommendation.cargarUsuarios ();
+        recommendation.cargarUsuarios ();
 
         recommendation.req1CrearLP();
         recommendation.req2EliminarLp();
@@ -55,11 +55,11 @@ public class Recommendation {
     }
 
     
-    /*public void cargarUsuarios() {
+    public void cargarUsuarios() {
         System.out.println("Cargando Usuarios...");
         PersistenciaUsuario persistencia = new PersistenciaUsuario(
                 "C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\usuario.txt");
-        this.usuarios = persistencia.CargarUsuarios();
+        this.usuarios = persistencia.CargarUsuarios(this.learningpaths, this.actividades);
         System.out.println("Usuarios cargados: " + this.usuarios.size());
     
         
@@ -67,14 +67,14 @@ public class Recommendation {
             Usuario primerUsuario = this.usuarios.values().iterator().next();
             System.out.println("Primer usuario cargado: ID = " + primerUsuario.getId_usuario() +", Tipo = " + (primerUsuario instanceof Profesor ? "Profesor" : "Estudiante") +", Login = " + primerUsuario.getLogin());
         }
-    }*/
-     
+    }
+
     public void cargarLearningPaths() {
         System.out.println("Cargando Learning Paths...");
     
         PersistenciaLearningPath carga = new PersistenciaLearningPath(
-            "C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\LearningPath.txt");
-        this.learningpaths = carga.cargarLearningPaths();
+            "C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\learningPath.txt");
+        this.learningpaths = carga.cargarLearningPaths(this.actividades);
     
         System.out.println("Learning Paths cargados: " + this.learningpaths.size());
     
@@ -124,7 +124,7 @@ public class Recommendation {
         System.out.println(nuevoLP.print());
         System.out.println("Learning Path añadido.");
         System.out.println("Learning Paths existentes: " + this.learningpaths.size());
-    }*/
+    }
     
     
 
@@ -132,7 +132,7 @@ public class Recommendation {
 
     public void req2EliminarLp() {
         System.out.println("Eliminando Learning Path...");
-        if (learningpaths.containsKey(1))) {
+        if (learningpaths.containsKey(1)) {
             learningpaths.remove(1);
             System.out.println("Learning Path eliminado.");
             System.out.println("Learning path actuales" + this.learningpaths.size());
@@ -173,10 +173,10 @@ public class Recommendation {
         System.out.println("Actividad Eliminada");
         System.out.println("Actividades existentes:  " + this.actividades.size());
 
-    }}
+    }
 
 
-    /* 
+     
     public void req5EvaluarActividad() {
         System.out.println("Evaluando Actividad...");
         Scanner scanner = new Scanner(System.in);
@@ -206,14 +206,14 @@ public class Recommendation {
         } else {
             System.out.println("Actividad no encontrada.");
         }
-    }
+    }}
 
 
 
-    public void req6InscribirseALp() {
+    /*public void req6InscribirseALp() {
     System.out.println("Inscribiéndose a Learning Path...");
     
-    Estudiante estudiante = getEstudiante(1); // ID de estudiante de ejemplo
+    Estudiante estudiante = getEstudiante(1); 
     LearningPath lp = obtenerLearningPath(1001); // ID de LP de ejemplo
 
     if (estudiante != null && lp != null) {

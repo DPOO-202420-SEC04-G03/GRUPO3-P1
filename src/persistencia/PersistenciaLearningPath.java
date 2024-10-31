@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import java.util.stream.Collectors;
+
 
 import learningpath.LearningPath;
 import actividad.Actividad;
@@ -20,14 +25,17 @@ public class PersistenciaLearningPath {
 
     private String rutaArchivo;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
-    private PersistenciaActividades persistenciaActividades;
+    
 
     public PersistenciaLearningPath(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
         
     }
 
-    public HashMap<Integer, LearningPath> cargarLearningPaths() {
+    
+
+
+    public HashMap<Integer, LearningPath> cargarLearningPaths(HashMap<Integer, Actividad> mapactividades) {
         HashMap<Integer, LearningPath> learningPaths = new HashMap<>();
         try (BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -51,7 +59,10 @@ public class PersistenciaLearningPath {
                 Date fecha_creacion = convertirFecha(partes[5]);
                 String version = partes[6];
                 int duracion = Integer.parseInt(partes[7]);
-                double rating = Double.parseDouble(partes[8]);
+                ArrayList<Double> ratings = Arrays.stream(partes[8].split(","))
+                                 .map(Double::parseDouble)
+                                 .collect(Collectors.toCollection(ArrayList::new));
+
                 Date fecha_modificacion = convertirFecha(partes[9]);
     
                 // Cargar actividades por sus IDs
@@ -59,7 +70,7 @@ public class PersistenciaLearningPath {
                 if (partes.length > 10 && !partes[10].isEmpty()) {
                     for (String idActividadStr : partes[10].split(",")) {
                         int idActividad = Integer.parseInt(idActividadStr.trim());
-                        Actividad actividad = persistenciaActividades.obtenerActividadPorID(idActividad);
+                        Actividad actividad = mapactividades.get(idActividad);
                         if (actividad != null) {
                             actividades.add(actividad);
                         }
@@ -70,6 +81,9 @@ public class PersistenciaLearningPath {
                 LearningPath lp = new LearningPath(titulo, descripcion, actividades, nivel_dificultad, id_LP, fecha_creacion, version, objetivo);
                 lp.setDuracion(duracion);  // Establecer la duración leída
                 learningPaths.put(id_LP, lp);
+                lp.setFecha_modificacion(fecha_modificacion);
+                lp.setratings(ratings);
+
     
                 // Leer la siguiente línea
                 linea = lector.readLine();
@@ -98,7 +112,12 @@ public class PersistenciaLearningPath {
                 sb.append(dateFormat.format(lp.getFecha_creacion())).append(";");
                 sb.append(lp.getVersion()).append(";");
                 sb.append(lp.getDuracion()).append(";");
-                sb.append(lp.getRating()).append(";");
+                Set<Double> ratings = new HashSet <>();
+                for (Double rating : lp.getratings()) {
+                    ratings.add(rating);
+                }
+                sb.append(String.join(",", ratings.toString().replaceAll("[\\[\\] ]", "")));
+                sb.append(";");
                 sb.append(dateFormat.format(lp.getFecha_modificacion())).append(";");
 
                 // Guardar IDs de las actividades

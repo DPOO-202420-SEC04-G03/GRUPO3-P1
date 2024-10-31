@@ -241,7 +241,7 @@ public class Profesor extends Usuario {
                         examen.setEstado_entrega("Revisado");
                         System.out.println("Calificación guaradada");
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
+                        
                         e.printStackTrace();
                     }
 

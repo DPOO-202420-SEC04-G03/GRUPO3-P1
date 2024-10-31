@@ -88,6 +88,11 @@ public class LearningPath {
         this.duracion = duracion;
     }
 
+
+    public List <Double> getratings(){
+        return this.ratings;
+    } 
+
     public double getRating() {
 
         if (this.ratings.isEmpty()) {
@@ -100,6 +105,9 @@ public class LearningPath {
             ratingtotal += rating;
         }
         return ratingtotal / this.ratings.size(); 
+    }
+    public void setratings(ArrayList <Double> ratings ){
+        this.ratings = ratings;
     }
 
     public Date getFecha_creacion() {
