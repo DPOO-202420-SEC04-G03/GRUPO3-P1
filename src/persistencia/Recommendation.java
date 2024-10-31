@@ -45,7 +45,7 @@ public class Recommendation {
         recommendation.req2EliminarLp();
         recommendation.req3CrearActividad();
         recommendation.req4EliminarActividad();
-        //recommendation.req5EvaluarActividad();
+        recommendation.req5EvaluarActividad();
         //recommendation.req6InscribirseALp();
         //recommendation.req7RealizarActividad();
         //recommendation.req8VerProgreso();
@@ -182,7 +182,7 @@ public class Recommendation {
         Scanner scanner = new Scanner(System.in);
     
         // Obtener actividad por ID de ejemplo
-        Actividad actividad = actividades.get(5302); // ID de actividad de ejemplo
+        Actividad actividad = actividades.get(5809); // ID de actividad de ejemplo
         if (actividad != null) {
             System.out.println("Evaluando la actividad: " + actividad.getDescripcion());
     
