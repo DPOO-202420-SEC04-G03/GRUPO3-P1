@@ -42,7 +42,7 @@ public class PersistenciaUsuario {
                 if (tipoUsuario.equals("Profesor")) {
                     Set <LearningPath> creados = new HashSet<>();
                     for (String id: partes[4].split(",")){
-                        creados.add(Recommendation.obtenerLearningPath(Integer.parseInt(id)));
+                        creados.add(Recommendation.LearningPath));
                     }
                     Profesor profe = new Profesor(idUsuario, login, password);
                     profe.setLearningPathsCreados(creados);

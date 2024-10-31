@@ -38,11 +38,11 @@ public class Recommendation {
         Recommendation recommendation = new Recommendation();
         recommendation.cargarActividades();
 
-        //recommendation.cargarLearningPaths();
+        recommendation.cargarLearningPaths();
         //recommendation.cargarUsuarios ();
 
-        //recommendation.req1CrearLP();
-        //recommendation.req2EliminarLp();
+        recommendation.req1CrearLP();
+        recommendation.req2EliminarLp();
         recommendation.req3CrearActividad();
         recommendation.req4EliminarActividad();
         //recommendation.req5EvaluarActividad();
@@ -54,8 +54,8 @@ public class Recommendation {
 
     }
 
-    /* 
-    public void cargarUsuarios() {
+    
+    /*public void cargarUsuarios() {
         System.out.println("Cargando Usuarios...");
         PersistenciaUsuario persistencia = new PersistenciaUsuario(
                 "C:\\Users\\juanp\\Documents\\DPO\\proyecto1ensayo\\src\\persistencia\\usuario.txt");
@@ -67,8 +67,8 @@ public class Recommendation {
             Usuario primerUsuario = this.usuarios.values().iterator().next();
             System.out.println("Primer usuario cargado: ID = " + primerUsuario.getId_usuario() +", Tipo = " + (primerUsuario instanceof Profesor ? "Profesor" : "Estudiante") +", Login = " + primerUsuario.getLogin());
         }
-    }
-    /* 
+    }*/
+     
     public void cargarLearningPaths() {
         System.out.println("Cargando Learning Paths...");
     
@@ -82,7 +82,7 @@ public class Recommendation {
             LearningPath primerLearningPath = this.learningpaths.values().iterator().next();
             System.out.println("Primer Learning Path cargado:\n" + primerLearningPath.print());
         }
-    }*/
+    }
     
     
 
@@ -96,7 +96,7 @@ public class Recommendation {
 
     }
 
-    /*public void req1CrearLP() {
+    public void req1CrearLP() {
         System.out.println("Creando Learning Path...");
         
         // Configuración de datos de ejemplo, similar a `req3CrearActividad`
@@ -130,15 +130,16 @@ public class Recommendation {
 
 
 
-    /*public void req2EliminarLp() {
+    public void req2EliminarLp() {
         System.out.println("Eliminando Learning Path...");
-        if (learningpaths.containsKey(1001)) {
-            learningpaths.remove(1001);
+        if (learningpaths.containsKey(1))) {
+            learningpaths.remove(1);
             System.out.println("Learning Path eliminado.");
+            System.out.println("Learning path actuales" + this.learningpaths.size());
         } else {
             System.out.println("Learning Path no encontrado.");
         }
-    }*/
+    }
 
 
 
