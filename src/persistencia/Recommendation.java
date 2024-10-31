@@ -45,12 +45,13 @@ public class Recommendation {
         recommendation.req2EliminarLp();
         recommendation.req3CrearActividad();
         recommendation.req4EliminarActividad();
+        
         recommendation.req5EvaluarActividad();
-        //recommendation.req6InscribirseALp();
-        //recommendation.req7RealizarActividad();
-        //recommendation.req8VerProgreso();
-        //recommendation.req9DuracionLp();
-        //recommendation.req10EscribirResena();
+        recommendation.req6InscribirseALp();
+        recommendation.req7RealizarActividad();
+        recommendation.req8VerProgreso();
+        recommendation.req9DuracionLp();
+        recommendation.req10EscribirResena();
 
     }
 
@@ -176,7 +177,7 @@ public class Recommendation {
     }
 
 
-     
+     //Usar coma como punto decimal
     public void req5EvaluarActividad() {
         System.out.println("Evaluando Actividad...");
         Scanner scanner = new Scanner(System.in);
@@ -187,7 +188,7 @@ public class Recommendation {
             System.out.println("Evaluando la actividad: " + actividad.getDescripcion());
     
             // Solicitar calificación
-            System.out.print("Ingrese una calificación (por ejemplo, entre 1 y 5): ");
+            System.out.print("Ingrese una calificación (por ejemplo, entre 1 y 5 usando coma decimal ej: 2,5): ");
             double calificacion = scanner.nextDouble();
     
             // Limpiar el buffer de entrada
@@ -206,15 +207,15 @@ public class Recommendation {
         } else {
             System.out.println("Actividad no encontrada.");
         }
-    }}
+    }
 
 
 
-    /*public void req6InscribirseALp() {
+    public void req6InscribirseALp() {
     System.out.println("Inscribiéndose a Learning Path...");
     
-    Estudiante estudiante = getEstudiante(1); 
-    LearningPath lp = obtenerLearningPath(1001); // ID de LP de ejemplo
+    Estudiante estudiante = (Estudiante) usuarios.get(2); 
+    LearningPath lp = learningpaths.get(3); // ID de LP de ejemplo
 
     if (estudiante != null && lp != null) {
         estudiante.inscribirseLearningPath(lp); // Usa el método correcto
@@ -229,9 +230,9 @@ public class Recommendation {
 
     public void req7RealizarActividad() {
     System.out.println("Realizando Actividad...");
-    Estudiante estudiante = getEstudiante(1); // ID de estudiante de ejemplo
-    Actividad actividad = actividades.get(5302); // ID de actividad de ejemplo
-    int idLearningPath = 1001; // ID de Learning Path de ejemplo
+    Estudiante estudiante = (Estudiante) usuarios.get(2); // ID de estudiante de ejemplo
+    Actividad actividad = actividades.get(5809); // ID de actividad de ejemplo
+    int idLearningPath = 2; // ID de Learning Path de ejemplo
 
     if (estudiante != null && actividad != null) {
         estudiante.realizarActividad(actividad, idLearningPath); // Pasa el ID del Learning Path
@@ -242,9 +243,9 @@ public class Recommendation {
 }
 
 
-public void req8VerProgreso() {
+    public void req8VerProgreso() {
     System.out.println("Viendo Progreso...");
-    Estudiante estudiante = getEstudiante(1); // ID de estudiante de ejemplo
+    Estudiante estudiante = (Estudiante) usuarios.get(2); // ID de estudiante de ejemplo
     if (estudiante != null) {
         estudiante.verProgreso();
     } else {
@@ -256,7 +257,7 @@ public void req8VerProgreso() {
 
     public void req9DuracionLp() {
         System.out.println("Calculando Duración del Learning Path...");
-        LearningPath lp = obtenerLearningPath(1001); // ID de LP de ejemplo
+        LearningPath lp = learningpaths.get(2 ); // ID de LP de ejemplo
         if (lp != null) {
             System.out.println("Duración total del LP: " + lp.getDuracion() + " minutos.");
         } else {
@@ -268,7 +269,7 @@ public void req8VerProgreso() {
 
     public void req10EscribirResena() {
         System.out.println("Escribiendo Reseña...");
-        Actividad actividad = actividades.get(5302); // ID de actividad de ejemplo
+        Actividad actividad = actividades.get(5809); // ID de actividad de ejemplo
         if (actividad != null) {
             actividad.agregarResena("Muy interesante y educativo."); // Usa el nombre correcto del método
             System.out.println("Reseña añadida a la actividad: " + actividad.getDescripcion());
@@ -308,7 +309,7 @@ public void req8VerProgreso() {
 
     }
         */
-    /* 
+    
     public static LearningPath obtenerLearningPath(int id) {
         return instance.learningpaths.get(id);
     }
@@ -320,4 +321,4 @@ public void req8VerProgreso() {
         return null;
 
     }
-}*/
+}
