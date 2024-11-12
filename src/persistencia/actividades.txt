@@ -1,4 +1,2 @@
-String tipo_actividad;int ID_actividad;String descripcion;String objetivo;String nivel_dificultad;ArrayList<String> resenas;List<Actividad> actividades_sugeridas;boolean prerrequisitos;Date fecha_limite;int duracion;extras
-Tarea;9803;numeros reales;que son los numeros reales;Principiante;actividad completa'actividad larga;;False;25-10-24;60;Entregado;24-10-24;virtual
-Tarea;1212;fracciones;que son las fracciones;Principiante;actividad breve'actividad corta;9803;False;25-10-24;30;Entregado;24-10-24;virtual
-Tarea;5809;sumando fracciones;aprender a sumar fracciones;Principiante;buena actividad'confusa actividad;9803,1212;True;25-10-24;120;Entregado;24-10-24;virtual
+Tarea;5809;sumando fracciones;aprender a sumar fracciones;Principiante;buena actividad'confusa actividad;9803,1212true;Fri Oct 25 00:00:00 GMT-05:00 2024;120;Entregado;Thu Oct 24 00:00:00 GMT-05:00 2024;virtual
+Tarea;8023;Algebra lineal;aprender regla de sarrus;Intermedio;Tarea dificil;5809false;Tue Nov 12 14:29:12 GMT-05:00 2024;60;sin recibir;Tue Nov 12 00:00:00 GMT-05:00 2024;virtual
